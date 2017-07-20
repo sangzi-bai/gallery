@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="http://localhost:8080/gallery/css/bootstrap.min.css">
     <script src="http://localhost:8080/gallery/js/jquery-3.2.1.js"></script>
     <script src="http://localhost:8080/gallery/js/bootstrap.min.js"></script>
@@ -22,29 +23,20 @@
     .input-group{
       margin-top: 5px;
     }
-    @media (max-width: 768px) {
-      body
-      {
-        font-size: 26px;
-      }
-      input{
-        font-size: 26px;
-      }
-    }
-    @media (max-width: 1200px) {
+    @media (min-width: 768px) {
       body{
-        font-size: 20px;
+        font-size: large;
       }
-      input{
-        font-size: 20px;
+      .container {
+        width: 750px;
       }
     }
   </style>
   <script>
     function updatacollapse(link) {
-      var number=link.href;
-      number=number.charAt(number.length-1);
-      if($("#panel-body"+number).html()!="")
+      var link=link.id;
+      var number= parseInt(link);
+      if($("#"+number+"panel-body").html()!="")
         return;
       $.ajax({
         type:"post",
@@ -52,15 +44,15 @@
         data:{serialNumber:number},
         async:false,
         success:function (data) {
-          $("#panel-body"+number).append(data);
+          $("#"+number+"panel-body").append(data);
           }
       })
     }
     function updataone(btn) {
-      var id=btn.id;
-      id=id.charAt(id.length-1);
-      var content=$("#content"+id).val();
-      var author=$("#name"+id).val();
+      var btn=btn.id;
+      var id= parseInt(btn);
+      var content=$("#"+id+"content").val();
+      var author=$("#"+id+"name").val();
       if(author==""){
         alert("请留名，谢谢")
         return;
@@ -75,9 +67,9 @@
         data:{serialNumber:id,content:content,author:author},
         async:false,
         success:function (data) {
-          $("#panel-body"+id).append(data);
-          $("#content"+id).val("");
-          $("#name"+id).val("");
+          $("#"+id+"panel-body").append(data);
+          $("#"+id+"content").val("");
+          $("#"+id+"name").val("");
         }
       })
     }
@@ -112,26 +104,26 @@
     <div class="row">
       <s:iterator value="list">
         <div id="contentIMG" class="col-sm-12 col-md-6">
-          <img src="<s:property value="path"/>">
+          <img src="<s:property value="path"/>" class="img-responsive">
 
-          <div class="col-sm-2 col-sm-offset-10 col-xs-6 col-xs-offset-6">
-            <a class="text-right" data-toggle="collapse" data-parent="#accordion" href="#collapse<s:property value="serialNumber"/>" onclick="updatacollapse(this)">
+          <div class="col-sm-3 col-sm-offset-9 col-xs-4 col-xs-offset-8">
+            <a class="text-right" data-toggle="collapse" data-parent="#accordion" id="<s:property value="serialNumber"/>col" href="#<s:property value="serialNumber"/>collapse" onclick="updatacollapse(this)">
               吐槽
             </a>
           </div>
 
-          <div id="collapse<s:property value="serialNumber"/>" class="panel-collapse collapse">
-            <div class="panel-body" id="panel-body<s:property value="serialNumber"/>"></div>
+          <div id="<s:property value="serialNumber"/>collapse" class="panel-collapse collapse">
+            <div class="panel-body" id="<s:property value="serialNumber"/>panel-body"></div>
 
             <form>
               <div class="input-group col-xs-12">
-                <textarea id="content<s:property value="serialNumber"/>" type="text" class="form-control" style="height: 150px"></textarea>
+                <textarea id="<s:property value="serialNumber"/>content" type="text" class="form-control" style="height: 150px"></textarea>
               </div>
               <div class="input-group col-xs-12">
-                <input id="name<s:property value="serialNumber"/>" class="form-control" type="text" placeholder="大侠留名！">
+                <input id="<s:property value="serialNumber"/>name" class="form-control" type="text" placeholder="大侠留名！">
               </div>
               <div class="input-group col-xs-12">
-                <button type="button" class="btn btn-primary btn-lg btn-block" id="btn<s:property value="serialNumber"/>" onclick="updataone(this)">吐槽</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" id="<s:property value="serialNumber"/>btn" onclick="updataone(this)">吐槽</button>
               </div>
             </form>
 
