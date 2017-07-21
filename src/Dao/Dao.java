@@ -17,7 +17,6 @@ import org.hibernate.service.ServiceRegistry;
 
 public class Dao {
     private Configuration cfg =null;
-
     private SessionFactory sf = null;
     private Session se =null;
     private Transaction ts =null;
@@ -60,5 +59,18 @@ public class Dao {
         Query query=se.createQuery(hql);
         int page = ((Long) query.iterate().next()).intValue();
         return page/2+page%2;
+    }
+
+    public boolean deleteimg(int serialNumber){
+        ImgEntity img= (ImgEntity) se.load(ImgEntity.class,serialNumber);
+        try {
+            String path=img.getPath();
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        se.delete(img);
+        destory();
+        return true;
     }
 }

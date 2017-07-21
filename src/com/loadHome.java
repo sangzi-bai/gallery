@@ -4,13 +4,12 @@ package com;
  * Created by Big_Boss on 2017/7/19.
  */
 import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionSupport;
 
 import java.util.ArrayList;
 import java.util.List;
-import Dao.ImgDAO;
+
 import Dao.Dao;
-import bases.ImgEntity;
+
 public class loadHome {
     private int homepage;
     private int page;

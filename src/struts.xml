@@ -22,5 +22,9 @@
         <action name="updataWhisp" class="com.updataWhisping">
             <result name="success">/whisperone.jsp</result>
         </action>
+        <action name="delete" class="com.deleteImg">
+            <result name="success">/delet_success.html</result>
+            <result name="error">/delet_error.html</result>
+        </action>
     </package>
 </struts>

@@ -1,4 +1,4 @@
-﻿package com;
+package com;
 
 /**
  * Created by Big_Boss on 2017/7/18.
