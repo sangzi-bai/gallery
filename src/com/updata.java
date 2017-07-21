@@ -1,5 +1,4 @@
 ﻿package com;
-
 /**
  * Created by Big_Boss on 2017/7/18.
  */
@@ -61,7 +60,7 @@ public class updata extends ActionSupport{
         ImgEntity img=new ImgEntity();
         Dao dao=new Dao();
         rename name=new rename();
-//重命名
+        //重命名
         setUploadImageFileName(name.createtFileName()+uploadImageFileName);
         //获取要保存文件夹的物理路径(绝对路径)
         String realPath=ServletActionContext.getServletContext().getRealPath("/img");
