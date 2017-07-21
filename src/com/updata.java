@@ -1,4 +1,4 @@
-package com;
+﻿package com;
 
 /**
  * Created by Big_Boss on 2017/7/18.
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Dao.Dao;
 import bases.ImgEntity;
+import com.rename;
 
 public class updata extends ActionSupport{
     private String path;
@@ -59,6 +60,9 @@ public class updata extends ActionSupport{
         String path="http://localhost:8080/gallery/img/";
         ImgEntity img=new ImgEntity();
         Dao dao=new Dao();
+        rename name=new rename();
+//重命名
+        setUploadImageFileName(name.createtFileName()+uploadImageFileName);
         //获取要保存文件夹的物理路径(绝对路径)
         String realPath=ServletActionContext.getServletContext().getRealPath("/img");
         File file = new File(realPath);
