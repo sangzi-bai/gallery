@@ -1,7 +1,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="http://localhost:8080/gallery/css/bootstrap.min.css">
     <script src="http://localhost:8080/gallery/js/jquery-3.2.1.js"></script>
     <script src="http://localhost:8080/gallery/js/bootstrap.min.js"></script>
     <title>updata</title>
@@ -9,6 +10,21 @@
 <style>
     input:checked+label{
         background-color: #1b6d85;
+    }
+     img{
+         max-width: 100%;
+         margin-top: 10px;
+     }
+    .input-group{
+        margin-top: 5px;
+    }
+    @media (min-width: 768px) {
+        body{
+            font-size: large;
+        }
+        .container {
+            width: 750px;
+        }
     }
 </style>
 <script>
@@ -36,6 +52,14 @@
         img.src="";
 
     }
+    function beforeupdata(){
+        var input=$("#rent-picture").val();
+        if(input==""){
+            alert("你没有选择图片，请先选择图片");
+            return false;
+        }
+        return true;
+    }
 </script>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -61,7 +85,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-            <form class="form-inline" role="form" method="post" enctype="multipart/form-data" action="http://localhost:8080/gallery/act/updata" style="margin-top: 20px">
+            <form class="form-inline" role="form" method="post" enctype="multipart/form-data" action="http://localhost:8080/gallery/act/updata" style="margin-top: 20px" onsubmit="return beforeupdata()">
                 <div class="form-group">
                     <label for="rent-picture" class="rent-imgbut">
                         <div class="form-control btn btn-default">上传您的图片</div>

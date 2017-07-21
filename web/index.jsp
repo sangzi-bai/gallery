@@ -104,6 +104,9 @@
     <div class="row">
       <s:iterator value="list">
         <div id="contentIMG" class="col-sm-12 col-md-6">
+
+          <h5>#img<s:property value="serialNumber"/></h5>
+
           <img src="<s:property value="path"/>" class="img-responsive">
 
           <div class="col-sm-3 col-sm-offset-9 col-xs-4 col-xs-offset-8">
@@ -128,9 +131,9 @@
             </form>
 
           </div>
-
+          <hr>
         </div>
-        <hr>
+
       </s:iterator>
     </div>
   </div>
