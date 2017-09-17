@@ -15,9 +15,9 @@ public List<ImgEntity> getpage(int pageNo)
         destory();
         return rtn;
     }
-    ```
+```
   下面的获取图片数量的方法也要更改：
-  ```java
+```java
     public int getpagesum(){
         String hql= "select count(*) from ImgEntity";
         Query query=se.createQuery(hql);
