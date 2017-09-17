@@ -2,7 +2,25 @@
 图片浏览
 
 
-喜欢画画，所以建了个展示我作品的网站，由于服务器较渣（学生服务器，便宜，速度慢）所以一个分页只显示两张图片
+喜欢画画，所以建了个展示我作品的网站，由于服务器较渣（学生服务器，便宜，速度慢）所以一个分页只显示两张图片，需要更改则在src/Dao/Dao.java里更改：
+public List<ImgEntity> getpage(int pageNo)
+    {
+        List<ImgEntity> rtn = new ArrayList<>();
+        Query query = se.createQuery("from ImgEntity");
+        int pageSize = 2; //这里的2改为你想要一也显示的图片数量
+        rtn = query.setFirstResult((pageNo-1)*pageSize)
+                .setMaxResults(pageSize)
+                .list();
+        destory();
+        return rtn;
+    }
+  下面的获取图片数量的方法也要更改：
+    public int getpagesum(){
+        String hql= "select count(*) from ImgEntity";
+        Query query=se.createQuery(hql);
+        int page = ((Long) query.iterate().next()).intValue();
+        return page/2+((page%2)>0?1:0); //这里的公式要改一下，具体自己斟酌，这里会返回一个最后一张图片所在的页数，总图片数除2（每页的数量），如果有余数是1则再加一页。
+    }
 
 算是边学习边弄吧，也写得乱七八糟的，用了struts2和hibernate框架（边学边做）
 lib文件我就不上传了，用的是IDEA自动生成的框架基本的lib，没有添加其他的。
